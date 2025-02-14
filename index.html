@@ -14,7 +14,7 @@
     console.log('hello');
     // Слушаем сообщения от родительского окна
     window.addEventListener('message', function (event) {
-
+        console.log('Received message:', event.data);
         if (event.data.type === 'SET_COOKIE_TEST_VALUE') {
             try {
                 // Пробуем установить cookie внутри iframe
