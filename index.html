@@ -22,6 +22,7 @@
 
                 // Проверяем, установилось ли cookie
                 const cookies = document.cookie;
+                console.log('COOKIES >>>', cookies);
                 const isCookieSet = cookies.includes(event.data.cookieName);
 
                 // Отправляем обратно в родительское окно результат установки cookie
