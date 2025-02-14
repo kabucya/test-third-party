@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<h1>hello</h1>
+</body>
+<script>
+    console.log('hello');
+    // Слушаем сообщения от родительского окна
+    window.addEventListener('message', function (event) {
+
+        if (event.data.type === 'SET_COOKIE_TEST_VALUE') {
+            try {
+                // Пробуем установить cookie внутри iframe
+                document.cookie = `${event.data.cookieName}=test_value; path=/`;
+
+                // Проверяем, установилось ли cookie
+                const cookies = document.cookie;
+                const isCookieSet = cookies.includes(event.data.cookieName);
+
+                // Отправляем обратно в родительское окно результат установки cookie
+                event.source.postMessage({ success: isCookieSet }, event.origin);
+            } catch (e) {
+                // Ошибка при установке cookie
+                event.source.postMessage({ success: false }, event.origin);
+            }
+        }
+    });
+
+</script>
+</html>
