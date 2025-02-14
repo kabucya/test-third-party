@@ -18,7 +18,7 @@
         if (event.data.type === 'SET_COOKIE_TEST_VALUE') {
             try {
                 // Пробуем установить cookie внутри iframe
-                document.cookie = `${event.data.cookieName}=test_value; path=/`;
+                document.cookie = `${event.data.cookieName}=test_value; path=/; SameSite=None; Secure`;
 
                 // Проверяем, установилось ли cookie
                 const cookies = document.cookie;
